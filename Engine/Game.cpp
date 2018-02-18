@@ -20,12 +20,24 @@
  ******************************************************************************************/
 #include "MainWindow.h"
 #include "Game.h"
+#include <random>
 
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )
+	gfx( wnd ),
+	rng( rd()),
+	xDist( 0,770 ),
+	yDist( 0, 570 )
 {
+	std::uniform_real_distribution<float> vDist(-2.5f, 2.5f);
+	leader.Init(Vec2(xDist(rng), yDist(rng)), Vec2(vDist( rng ), vDist( rng ) ) );
+	
+	flock.reserve(nBirds);
+	for (int i = 0; i < nBirds; ++i)
+	{
+		flock.emplace_back( Vec2( xDist( rng ), yDist( rng ) ) );
+	}
 }
 
 void Game::Go()
@@ -38,8 +50,18 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	float dt = 1;
+
+	leader.Update(dt);
+	for (int i = 0; i < nBirds; i++) {
+		flock[i].Update(dt);
+	}
 }
 
 void Game::ComposeFrame()
 {
+	leader.Draw(gfx);
+	for (int i = 0; i < nBirds; i++) {
+		flock[i].Draw(gfx);
+	}
 }

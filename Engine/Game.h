@@ -23,6 +23,11 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
+#include "Leader.h"
+#include <random>
+//#include "Vec2.h"
+#include "Bird.h"
+#include <vector>
 
 class Game
 {
@@ -42,5 +47,12 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+	std::random_device rd;
+	std::mt19937 rng;
+	std::uniform_real_distribution<float> xDist;
+	std::uniform_real_distribution<float> yDist;
+	Leader leader;
+	static constexpr int nBirds = 10;
+	std::vector<Bird> flock;
 	/********************************/
 };
