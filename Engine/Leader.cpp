@@ -40,3 +40,8 @@ void Leader::Draw(Graphics& gfx)
 {
 	gfx.DrawRectByDim((int)pos.x, (int)pos.y, (int)dim, (int)dim, c);
 }
+
+Vec2 Leader::Getpos()
+{
+	return pos;
+}

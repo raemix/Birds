@@ -30,13 +30,13 @@ Game::Game( MainWindow& wnd )
 	xDist( 0,770 ),
 	yDist( 0, 570 )
 {
-	std::uniform_real_distribution<float> vDist(-2.5f, 2.5f);
+	std::uniform_real_distribution<float> vDist(-1.0f, 1.20f);
 	leader.Init(Vec2(xDist(rng), yDist(rng)), Vec2(vDist( rng ), vDist( rng ) ) );
-	
+	std::uniform_real_distribution<float> MaxSpeed(0.60f, 1.0f);
 	flock.reserve(nBirds);
 	for (int i = 0; i < nBirds; ++i)
 	{
-		flock.emplace_back( Vec2( xDist( rng ), yDist( rng ) ) );
+		flock.emplace_back( Vec2( xDist( rng ), yDist( rng ) ), Vec2( 0, 0 ), MaxSpeed( rng) , Vec2( vDist( rng ), vDist( rng ) ) );
 	}
 }
 
@@ -54,7 +54,7 @@ void Game::UpdateModel()
 
 	leader.Update(dt);
 	for (int i = 0; i < nBirds; i++) {
-		flock[i].Update(dt);
+		flock[i].Update(dt, leader.Getpos());
 	}
 }
 

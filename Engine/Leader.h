@@ -15,7 +15,7 @@ public:
 	void Init(Vec2& pos, Vec2& vel);
 	void Update(float dt);
 	void Draw(Graphics& gfx);
-
+	Vec2 Getpos();
 private:
 	Vec2 pos;
 	Vec2 vel;
