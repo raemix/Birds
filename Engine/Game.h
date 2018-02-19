@@ -52,7 +52,7 @@ private:
 	std::uniform_real_distribution<float> xDist;
 	std::uniform_real_distribution<float> yDist;
 	Leader leader;
-	static constexpr int nBirds = 100;
+	static constexpr int nBirds = 500;
 	std::vector<Bird> flock;
 	/********************************/
 };

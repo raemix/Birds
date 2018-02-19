@@ -6,6 +6,9 @@ Bird::Bird(const Vec2& in_pos, const Vec2& in_vel, float in_MaxSpeed, const Vec2
 	vel = in_vel;
 	MaxSpeed = in_MaxSpeed;
 	offset = in_Offset;
+	while (abs(offset.x) + abs(offset.y) > 1.20f) {
+		offset *= 0.9f;
+	}
 }
 
 void Bird::Init(const Vec2& in_pos)
@@ -40,7 +43,8 @@ void Bird::Update(float in_dt, const Vec2& lin_pos)
 		pos.y = Graphics::ScreenHeight - 1 - dim;
 		vel.y = -vel.y;
 	}
-	FollowTheLeader(vel, lpos);
+	if (rand() % 30 == 1) 
+		FollowTheLeader(vel, lpos);
 }
 
 void Bird::Draw(Graphics & gfx)
@@ -51,6 +55,6 @@ void Bird::Draw(Graphics & gfx)
 void Bird::FollowTheLeader(Vec2& vel, Vec2& in_pos)
 {
 	vel -= pos - in_pos;
-	vel += offset * 10;
+	vel += offset * 40;
 	vel.Normalize();
 }

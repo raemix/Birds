@@ -30,7 +30,7 @@ Game::Game( MainWindow& wnd )
 	xDist( 0,770 ),
 	yDist( 0, 570 )
 {
-	std::uniform_real_distribution<float> vDist(-1.0f, 1.20f);
+	std::uniform_real_distribution<float> vDist(-1.0f, 1.0f);
 	leader.Init(Vec2(xDist(rng), yDist(rng)), Vec2(vDist( rng ), vDist( rng ) ) );
 	std::uniform_real_distribution<float> MaxSpeed(0.60f, 1.0f);
 	flock.reserve(nBirds);
